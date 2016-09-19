@@ -1,18 +1,3 @@
-# Node Project Template
-
-Get an ES 6 project setup and ready for development in seconds.
-
-## Out of the Box
-
-- Babel (support includes async, await, decorators)
-- ESDoc
-- Jasmine
-- Development Web Server
-- Browserify
-- Minification
-- Automatically Rebuild on File Save
-- JSHint
-- JSCS
 
 ### Building
 
