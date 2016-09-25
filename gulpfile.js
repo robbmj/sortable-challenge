@@ -63,10 +63,21 @@ function meta(metaScriptOptions) {
         .pipe(gulp.dest(buildConfig.metaBuildDir));
 }
 
-// Build Tasks
-gulp.task('clean', ['build'], function () {
-    console.log([buildConfig.metaBuildDir])
+function cleanBuild() {
+    return del([buildConfig.buildDir]);
+}
+
+function cleanTmp() {
     return del([buildConfig.metaBuildDir]);
+}
+
+// Dev Build Tasks
+gulp.task('default', ['clean-tmp-dev']);
+
+gulp.task('clean-tmp-dev', ['build-dev'], cleanTmp);
+
+gulp.task('build-dev', ['babel-dev'], function () {
+    return build(buildConfig.devBuild);
 });
 
 gulp.task('babel-dev', ['meta-dev'], function () {
@@ -75,31 +86,37 @@ gulp.task('babel-dev', ['meta-dev'], function () {
         .pipe(gulp.dest(buildConfig.babelBuildDir));
 });
 
+gulp.task('meta-dev', ['clean-build'], function () {
+    return meta(buildConfig.devBuild.metaScript);
+});
+
+gulp.task('clean-build', cleanBuild);
+
+
+
+/*
+
+// Prod Build Tasks
+
 gulp.task('babel-prod', ['meta-prod'], function () {
     return gulp.src(buildConfig.babelEntryPoint)
         .pipe(babel(buildConfig.babel))
         .pipe(gulp.dest(buildConfig.babelBuildDir));
 });
 
-gulp.task('meta-dev', function () {
-    return meta(buildConfig.devBuild.metaScript);
-});
-
 gulp.task('meta-prod', function () {
     return meta(buildConfig.prodBuild.metaScript);
-});
-
-gulp.task('build', ['babel-dev'], function () {
-    return build(buildConfig.devBuild);
 });
 
 gulp.task('prod-build', ['bebel-prod'], function () {
     return build(buildConfig.prodBuild);
 });
 
+*/
+
 gulp.task('watch', function () {
     watch(buildConfig.srcDir, batch(function (events, done) {
-        gulp.start('clean', done);
+        gulp.start('clean-tmp-dev', done);
     }));
 });
 
@@ -138,4 +155,3 @@ gulp.task('doc', function () {
         .pipe(esdoc(buildConfig.esdoc.config));
 });
 
-gulp.task('default', ['clean']);

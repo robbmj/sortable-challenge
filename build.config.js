@@ -78,7 +78,11 @@ module.exports.esdoc = {
             {name: 'esdoc-es7-plugin'}
         ],
         access: ['public', 'protected', 'private'],
-        unexportIdentifier: true
+        unexportIdentifier: true,
+        test: {
+            type: "mocha",
+            source: "./tests"
+        }
     }
 };
 

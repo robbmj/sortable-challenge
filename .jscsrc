@@ -35,7 +35,7 @@
     "requireMultipleVarDecl": "onevar",
     "requireVarDeclFirst": true,
     "requireBlocksOnNewline": true,
-    "disallowEmptyBlocks": true,
+    "disallowEmptyBlocks": false,
     "disallowSpacesInsideArrayBrackets": true,
     "disallowSpacesInsideParentheses": true,
     "disallowDanglingUnderscores": true,
@@ -53,8 +53,7 @@
     "requireSpaceBeforeBinaryOperators": true,
     "requireSpaceAfterBinaryOperators": true,
     "disallowKeywords": [
-        "with",
-        "continue"
+        "with"
     ],
     "validateIndentation": 4,
     "disallowMixedSpacesAndTabs": true,
@@ -65,5 +64,7 @@
     "requireDotNotation": true,
     "disallowNewlineBeforeBlockStatements": true,
     "disallowMultipleLineStrings": true,
-    "requireSpaceBeforeObjectValues": true
+    "requireSpaceBeforeObjectValues": true,
+    "disallowMultipleVarDecl": false,
+    "disallowVar": true
 }
