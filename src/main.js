@@ -1,7 +1,13 @@
 'use strict';
 
+import Promise from 'bluebird';
+
 import getListings from './listing';
 import condence from './join-listings';
+
+import getProducts from './product';
+
+import Matcher from './matcher';
 
 /**
  * Console.log Each Listing's title
@@ -29,9 +35,14 @@ function printListings(listings) {
  */
 async function main() {
     try {
-        const listings = await getListings('./input/listings.txt');
-        condence(listings);
-        printListings(listings);
+        const [products, listings] = await Promise.all([
+                getProducts('./input/products.txt'),
+                getListings('./input/listings.txt')
+            ]);
+
+        const matcher = new Matcher(products);
+
+        console.log(matcher.match('asdf'));
     }
     catch (e) {
         console.log(e);

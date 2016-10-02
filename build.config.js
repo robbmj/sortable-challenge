@@ -97,7 +97,8 @@ module.exports.babel = {
         'transform-async-to-generator',
         'transform-regenerator',
         'transform-runtime'
-    ]
+    ],
+    sourceMaps: 'inline'
 };
 
 module.exports.srcDir           = './src/**/*.js';
